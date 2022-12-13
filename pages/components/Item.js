@@ -3,7 +3,7 @@ import { View, Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
 const Item = ({ item, navigation }) => {
   
   function formatter(str) {
-    return str.match(/\d{2}:\d{2} [AP]M/)[0];
+    return str.match(/(0?[0-9]|1[0-9]|2[0-3]):[0-9]+\s[a-zA-Z]+/i)[0];
   }
 
   return (
