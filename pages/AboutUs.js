@@ -1122,7 +1122,6 @@ function Ratin() {
 export default function AboutUs() {
   const Tab = createBottomTabNavigator();
   return (
-    <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen
           name="Kevin"
@@ -1175,7 +1174,6 @@ export default function AboutUs() {
           }}
         />
       </Tab.Navigator>
-    </NavigationContainer>
   );
 }
 

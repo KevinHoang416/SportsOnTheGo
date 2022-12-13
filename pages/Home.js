@@ -1,40 +1,40 @@
-import { StyleSheet, Button, View, ImageBackground } from 'react-native';
+import { StyleSheet, View, ImageBackground, TouchableHighlight, Text } from 'react-native';
 const image = { uri: "https://www.wallpaperflare.com/static/296/615/731/nba-basketball-logo-wallpaper.jpg" };
 
 export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-        <Button
-          color="black"
-          title="Login"
-          onPress={() => navigation.navigate("Login")}
-        />
-        <Button
-          color="black"
-          title="Register"
-          onPress={() => navigation.navigate("Register")}
-        />
-        <Button
-          color="black"
-          title="About Us"
-          onPress={() => navigation.navigate("AboutUs")}
-        />
-        <Button
-          color="black"
-          title="PlayerGallery"
-          onPress={() => navigation.navigate("PlayerGallery")}
-        />
-        <Button
-          color="black"
-          title="Score"
-          onPress={() => navigation.navigate("Score")}
-        />
-        <Button
-          color="black"
-          title="Search Teams"
-          onPress={() => navigation.navigate("Search Teams")}
-        />
+        <TouchableHighlight style={styles.button}
+                underlayColor={"#323639"}
+                onPress={() => navigation.navigate("Register")}>
+            <Text style={styles.text}>Register</Text>
+        </TouchableHighlight>
+        <TouchableHighlight style={styles.button}
+                underlayColor={"#323639"}
+                onPress={() => navigation.navigate("Login")}>
+            <Text style={styles.text}>Login</Text>
+        </TouchableHighlight>
+        <TouchableHighlight style={styles.button}
+                underlayColor={"#323639"}
+                onPress={() => navigation.navigate("PlayerGallery")}>
+            <Text style={styles.text}>Player Gallery</Text>
+        </TouchableHighlight>
+        <TouchableHighlight style={styles.button}
+                underlayColor={"#323639"}
+                onPress={() => navigation.navigate("Score")}>
+            <Text style={styles.text}>Score</Text>
+        </TouchableHighlight>
+        <TouchableHighlight style={styles.button}
+                underlayColor={"#323639"}
+                onPress={() => navigation.navigate("Search Teams")}>
+            <Text style={styles.text}>Search Teams</Text>
+        </TouchableHighlight>
+        <TouchableHighlight style={styles.button}
+                underlayColor={"#323639"}
+                onPress={() => navigation.navigate("AboutUs")}>
+            <Text style={styles.text}>About Us</Text>
+        </TouchableHighlight>
       </ImageBackground>
     </View>
   );
@@ -45,10 +45,24 @@ const styles = StyleSheet.create({
     flex: 1,
 
   },
-  buttonstyles: {
-    color: "black"
-
+  text: {
+    fontSize: 22,
+     color: "white"
   },
+  button: {
+        backgroundColor: "black",
+        padding: 20,
+        borderRadius: 5,
+        margin: 5,
+        flexDirection:'row',
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign:'center',
+        shadowColor: "dimgray",
+        shadowOpacity: 0.5,
+        shadowOffset: { width: 4, height: 5 },
+        
+    },
   image: {
     flex: 1,
     justifyContent: "center"

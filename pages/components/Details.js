@@ -60,11 +60,9 @@ const Details = ({ route, navigation }) => {
         <View style={{ flex: 1, justifyContent: 'center' }}>
           <Text
             style={
-              style={
-              !data.competitions[0].competitors[1].winner &&
-              data.status.type.state == 'post'
-                ? styles.base
-                : styles.winner
+              data.competitions[0].competitors[1].winner
+                ? styles.winner
+                : styles.base
             }>
             {data.competitions[0].competitors[1].score}
           </Text>
@@ -89,10 +87,9 @@ const Details = ({ route, navigation }) => {
         <View style={{ flex: 1, justifyContent: 'center' }}>
           <Text
             style={
-              !data.competitions[0].competitors[0].winner &&
-              data.status.type.state == 'post'
-                ? styles.base
-                : styles.winner
+              data.competitions[0].competitors[0].winner
+                ? styles.winner
+                : styles.base
             }>
             {data.competitions[0].competitors[0].score}
           </Text>

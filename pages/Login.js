@@ -1,7 +1,7 @@
 import { SafeAreaView, StyleSheet, TextInput, 
-  Text, View, Button, Alert,ImageBackground } from "react-native";
+  Text, View, Button, Alert,ImageBackground, TouchableHighlight } from "react-native";
 import { useState } from "react";
-import Auth from "../Token"
+import Auth from "./components/Token"
 
 const image = { uri: "https://www.wallpaperflare.com/static/296/615/731/nba-basketball-logo-wallpaper.jpg" };
 
@@ -24,18 +24,27 @@ export default function Login({ navigation, route }) {
   }
 
   const logout = () => {
-    navigation.navigate("Home");
     Auth.token = false;
+    Alert.alert("Logged out successfully")
+    navigation.navigate("Home");
   }
 
   const login = () => {
     if(authLogin(username, password)){
       Auth.token = true;
       setAuthFail(false);
-      navigation.navigate("Home");
+      Alert.alert(
+        "Login Successful",
+        "Welcome " + username + "!",
+        [
+          { text: "OK", onPress: () => navigation.navigate("Home") }
+        ]
+      );
     }
     else {
       setAuthFail(true);
+      setUsername(null);
+      setPassword(null);
     }
   }
 
@@ -53,10 +62,17 @@ export default function Login({ navigation, route }) {
           ? 
             <View>
               <Text style={styles.midText}> You are already signed into an account</Text>
-              <View style={styles.button}>
-                <Button color="black"
-                  title="Logout"
-                  onPress={() => logout()} />
+              <View style={styles.spacer}>
+                <TouchableHighlight style={styles.button}
+                  underlayColor={"#323639"}
+                  onPress={() => navigation.navigate("Home")}>
+                  <Text style={styles.text}>Home</Text>
+                </TouchableHighlight>
+                <TouchableHighlight style={styles.button}
+                  underlayColor={"#323639"}
+                  onPress={() => logout()}>
+                  <Text style={styles.text}>Logout</Text>
+                </TouchableHighlight>
               </View>
             </View>
           :
@@ -77,7 +93,6 @@ export default function Login({ navigation, route }) {
                 placeholder="password"
                 placeholderTextColor='grey'
                 secureTextEntry={true}
-                color
                 textContentType="password"
               />
               <View style={styles.leftText}>  
@@ -86,17 +101,19 @@ export default function Login({ navigation, route }) {
                     Forgot password? 
                 </Text>
               </View>
-              <View style={styles.button}>
-                <Button 
-                    color="black"
-                    title="Login"
-                    onPress={() => login()}/>
-              </View>
-              <View style={styles.button}>  
-                    <Button 
-                    color="black"
-                    title="Sign Up"
-                    onPress={() => navigation.navigate("Register")}/>
+              <View style={styles.spacer}>
+                <TouchableHighlight style={styles.button}
+                  underlayColor={"#323639"}
+                  onPress={() => login()}>
+                  <Text style={styles.text}>Login</Text>
+                </TouchableHighlight>
+              
+
+                <TouchableHighlight style={styles.button}
+                  underlayColor={"#323639"}
+                  onPress={() => navigation.navigate("Register")}>
+                  <Text style={styles.text}>Sign-Up</Text>
+                </TouchableHighlight>
               </View>
             </View>
         }
@@ -109,13 +126,15 @@ const styles = StyleSheet.create({
   leftText:{
     flexDirection:'row-reverse',
     textAlign:'left',
+    fontSize:14,
     margin:5,
   },
   error:{
-    backgroundColor:'black',
+    backgroundColor:'white',
     color:'red',
     padding:2,
-    textAlign:'center'
+    textAlign:'center',
+    fontSize:16,
   },
   midText:{
     backgroundColor:'black',
@@ -135,14 +154,33 @@ const styles = StyleSheet.create({
     margin: 10,
     borderWidth: 1,
     padding: 10,
-    fontSize: 16
+    fontSize: 16,
+    borderRadius:5,
+  },
+   text: {
+    fontSize: 20,
+     color: "white"
   },
   button: {
-    margin:10,
-    padding:10,
-  },
+        backgroundColor: "black",
+        padding: 10,
+        borderRadius: 5,
+        margin: 5,
+        flexDirection:'row',
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign:'center',
+        shadowColor: "dimgray",
+        shadowOpacity: 0.5,
+        shadowOffset: { width: 4, height: 5 },
+        
+    },
   image: {
     flex: 1,
     justifyContent: "center",
+  },
+  spacer:{
+    margin:30,
+    padding:30,
   },
 });
